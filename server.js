@@ -16,9 +16,13 @@ app.get('/store/:id/byCat', store.findBySubCat);
 app.get('/store/:id', store.findById);
 app.get('/store', store.findAll);
 app.get('/cats', store.getAllCategories);
+app.get('/load', store.loadData);
+app.get('/healthz',function(req,resp){
+    resp.send('OK');
+});
 
 app.listen(8080);
 
 setTimeout(function(){
-	store.insertDummyData();
+	//store.insertDummyData();
 },2000);

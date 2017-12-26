@@ -1,10 +1,10 @@
 var MongoClient = require('mongodb').MongoClient;
 var request = require('request-json');
-var client = request.createClient('http://recommendations.ai.svc.cluster.local:8080');
-
+var recco_endpoint= process.env.recco_url || 'http://recommendations.bi:8080';
+var client = request.createClient(recco_endpoint);
 var url = process.env.mongo_url;  //"mongodb://app_user:password@127.0.0.1/store"
 var db=null;
-console.log(url);
+console.log(url,recco_endpoint);
 
 MongoClient.connect(url, function(err, dbconnection) {
     if (err) throw err;
@@ -93,7 +93,8 @@ exports.findAll = function(req, res) {
     
 };
 
-exports.insertDummyData = function(){	
+exports.loadData = function(req, res) {
+    console.log('loading sample data');
 	var categories = [
 		{id:1,CatName:"Wireless",SubCats:[{id:1,name:"RF"},{id:2,name:"XBEE"},{id:3,name:"Wifi"},{id:4,name:"Bluetooth"}]},
 		{id:2,CatName:"Development Boards",SubCats:[{id:5,name:"Arduino"},{id:6,name:"ARM"},{id:7,name:"8051"},{id:8,name:"AVR"}]},
@@ -110,7 +111,8 @@ exports.insertDummyData = function(){
 	
 	db.collection('Products', function(err, collection) {							
 		collection.insert(products, {safe:true}, function(err, result) {
-			console.log(err,result,"products data inserted");	
+            console.log(err,result,"products data inserted");	
+            res.jsonp({'msg':'data loaded'});
 		});					
 	});
 };
