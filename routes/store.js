@@ -106,7 +106,7 @@ exports.loadData = function(req, res) {
 		});					
 	});
 	
-	var products=[ {product_id:'cable_1',name:"Wire",title:"Wire",img:'img/storeImages/08566-01-L_l_th.jpg',images:['storeImages/08566-01-L_l_th.jpg'],
+	var products=[ {product_id:'cable_1',name:"Wire",title:"Wire",img:'static/img/storeImages/08566-01-L_l_th.jpg',images:['static/storeImages/08566-01-L_l_th.jpg'],
         documents:"Wire",features:"Wire",shipping:55,caption:"Cable Wire",price:20,subCat:1}]
 	
 	db.collection('Products', function(err, collection) {							
