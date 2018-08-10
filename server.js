@@ -24,7 +24,7 @@ app.get('/healthz',function(req,resp){
 app.listen(8080);
 
 setTimeout(function(){
-	//store.insertDummyData();
+	store.insertDummyData();
 },2000);
 module.exports={
     app: app,
